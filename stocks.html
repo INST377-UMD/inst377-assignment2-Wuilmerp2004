@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <title>Stocks Page</title>
+        <link rel="stylesheet" href="home.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+        <script src="stocks.js" defer></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+        <style>
+            #chartDiv {
+                width: 75%;
+            }
+            table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+                font-size: 1rem;
+              }
+              
+              th,
+              td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border: 1px solid #ffffff;
+                text-align: center;
+              }
+              
+              thead {
+                background-color: #343a40;
+                color: #ffffff;
+              }
+              
+              tbody tr:nth-of-type(odd) {
+                background-color: #f8f9fa; /* striped rows */
+              }
+              .button-68 {
+                appearance: none;
+                backface-visibility: hidden;
+                background-color: #27ae60;
+                border-radius: 8px;
+                border-style: none;
+                box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+                box-sizing: border-box;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: normal;
+                line-height: 1.5;
+                outline: none;
+                overflow: hidden;
+                padding: 13px 20px;
+                position: relative;
+                text-align: center;
+                text-decoration: none;
+                transform: translate3d(0, 0, 0);
+                transition: all .3s;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                vertical-align: top;
+                white-space: nowrap;
+              }
+              
+              .button-68:hover {
+                background-color: #1e8449;
+                opacity: 1;
+                transform: translateY(0);
+                transition-duration: .35s;
+              }
+              
+              .button-68:active {
+                transform: translateY(2px);
+                transition-duration: .35s;
+              }
+              
+              .button-68:hover {
+                box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+              }
+        </style>
+    </head>
+    <body>
+    <h1>INST377 - Activities</h1>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="stocks.html">Stocks</a></li>
+            <li><a href="dogs.html">Dogs</a></li>
+        </ul>
+    </nav>
+    <h2>Let's chart some stocks!</h2>
+        <form id ="stockForm">
+            <label for="stockSymbol">Enter Stock Symbol:</label>
+            <input type="text" id="ticker" name="ticker" required>
+
+            <select id="range">
+                <option value="30">30 Days</option>
+                <option value="60">60 Days</option>
+                <option value="90">90 Days</option>
+            </select>
+            <br>
+            <button class="button-68" type="submit">Lookup!</button>
+        </form>
+    <div id="chartDiv">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Comment Count</th>
+            <th scope="col">Sentiment</th>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="audionav">
+        <h2>In this web page there are options to Navigate using Audio!</h2>
+        <p>Ensure your Mic is enabled to be able to use this feature</p>
+        <div id="lists">
+            <ul>
+            <li>Navigate to a Different Page</li>
+                <ul>
+                    <li>Say:<b> Navigate to &lt;page&gt;</b></li>
+                </ul>
+            <li>Change the Page Color</li>
+                <ul>
+                    <li>Say:<b> Change the color to &lt;color&gt;</b></li>
+                </ul>
+            <li>Say Hello Back to you!</li>
+                <ul>
+                    <li>Say:<b> Hello</b></li>
+                </ul>
+            <li>Show Stocks</li>
+                <ul>
+                    <li>Say:<b> Lookup &lt;Stock Name&gt;</b></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="audio">
+            <button id="start-record-btn" title="Start Recording">Turn On Listening</button>
+            <button id="stop-record-btn" title="Stop Recording">Turn Off Listening</button>
+        </div>
+</body>
+</html>
