@@ -39,12 +39,12 @@
             #dogSlider {
               width: 612px;
               height: 612px;
-              margin: 0 auto; /* horizontally center the whole div */
+              margin: 0 auto;
             }
           
             #dogSlider img {
               display: block;
-              margin: 0 auto; /* center the image inside the div */
+              margin: 0 auto; 
             }
             .breed-button {
                 margin: 5px;
@@ -86,7 +86,7 @@
             async function loadDogCarousel() {
                 const dogCarousel = document.getElementById('dogSlider');
     
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 10; i++) {
                     const res = await fetch("https://dog.ceo/api/breeds/image/random");
                     const data = await res.json();
                     const img = document.createElement("img");
@@ -155,7 +155,7 @@
                     </ul>
                 <li>Show Dog Breeds</li>
                     <ul>
-                        <li>Say:<b> Show dog breed &lt;Dog Breed Name&gt;</dog></b></li>
+                        <li>Say:<b> Show dog breed &lt;Dog Breed Name&gt;</b></li>
                     </ul>
                 </ul>
             </div>

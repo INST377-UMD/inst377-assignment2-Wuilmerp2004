@@ -2,7 +2,7 @@ const form = document.getElementById('stockForm');
 const chartCanvas = document.getElementById('myChart').getContext('2d');
 let chartInstance = null;
 
-// ✅ 1. Define the function so it can be reused
+
 async function fetchStockChart(ticker, range) {
   const toDate = new Date();
   const fromDate = new Date();
@@ -57,7 +57,7 @@ async function fetchStockChart(ticker, range) {
   }
 }
 
-// ✅ 2. Update the form submit to use the function
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -67,7 +67,7 @@ form.addEventListener('submit', async (event) => {
   fetchStockChart(ticker, range);
 });
 
-// ✅ 3. Your Reddit API logic remains unchanged
+
 fetch("https://tradestie.com/api/v1/apps/reddit?date=2022-04-03").then((data) => {
   return data.json();
 }).then((objectData) => {
