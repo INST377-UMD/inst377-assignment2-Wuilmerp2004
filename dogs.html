@@ -1,0 +1,229 @@
+<html>
+    <head>
+        <title>Dogs Page</title>
+        <link rel="stylesheet" href="home.css">
+        <script src="https://rawgit.com/ruyadorno/simple-slider/master/dist/simpleslider.min.js" defer></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+        <style>
+            
+.button-62 {
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  border: 0;
+  width:17%;
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button-62:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+            #dogSlider {
+              width: 612px;
+              height: 612px;
+              margin: 0 auto; /* horizontally center the whole div */
+            }
+          
+            #dogSlider img {
+              display: block;
+              margin: 0 auto; /* center the image inside the div */
+            }
+            .breed-button {
+                margin: 5px;
+                padding: 10px 15px;
+                background-color: #f7c08a;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+              }
+          
+              .breed-container {
+                margin-top: 20px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                background-color: #f9f9f9;
+                display: none;
+              }
+          </style>
+    </head>
+    <body>
+            <h1>INST377 - Doggos</h1>
+    
+        <nav id="nav">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="stocks.html">Stocks</a></li>
+                <li><a href="dogs.html">Dogs</a></li>
+            </ul>
+        </nav>
+
+        <h1>Doggos🐶</h1>
+        <div id="dogSlider" style="width:612px; height:612px" data-simple-slider>
+          </div>
+          <script>
+            const dogCarousel = document.getElementById('dogSlider');
+
+            async function loadDogCarousel() {
+                const dogCarousel = document.getElementById('dogSlider');
+    
+                for (let i = 0; i < 5; i++) {
+                    const res = await fetch("https://dog.ceo/api/breeds/image/random");
+                    const data = await res.json();
+                    const img = document.createElement("img");
+                    img.src = data.message;
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                    dogCarousel.appendChild(img);
+                }
+    
+                simpleslider.getSlider();
+                }
+           
+          </script>
+          <div id="button-container"></div>
+          <div id="breed-info" class="breed-container"></div>
+        
+          <script>
+            let breedData = [];
+            async function loadDogBreeds(){
+                const response = await fetch("https://dogapi.dog/api/v2/breeds");
+                const data = await response.json();
+                breedData = data.data;  
+                const buttonContainer = document.getElementById("button-container");
+                const breedInfoContainer = document.getElementById("breed-info");
+
+            breedData.forEach((breed) => {
+                 const button = document.createElement("button");
+                    button.textContent = breed.attributes.name;
+                 button.setAttribute("class", "button-62");
+                button.addEventListener("click", () => {
+                 breedInfoContainer.innerHTML = `
+                    <h2>${breed.attributes.name}</h2>
+                    <p><strong>Description:</strong> ${breed.attributes.description}</p>
+                    <p><strong>Min Life Span:</strong> ${breed.attributes.life.min}</p>
+                    <p><strong>Max Life Span:</strong> ${breed.attributes.life.max}</p>
+                 `;
+        breedInfoContainer.style.display = "block";
+      });
+
+      buttonContainer.appendChild(button);
+    });
+            }
+                  
+            window.onload = function () {
+                loadDogCarousel();
+                loadDogBreeds();
+              };
+            
+          </script>
+          <div class="audionav">
+            <h2>In this web page there are options to Navigate using Audio!</h2>
+            <p>Ensure your Mic is enabled to be able to use this feature</p>
+            <div id="lists">
+                <ul>
+                <li>Navigate to a Different Page</li>
+                    <ul>
+                        <li>Say:<b> Navigate to &lt;page&gt;</b></li>
+                    </ul>
+                <li>Change the Page Color</li>
+                    <ul>
+                        <li>Say:<b> Change the color to &lt;color&gt;</b></li>
+                    </ul>
+                <li>Say Hello Back to you!</li>
+                    <ul>
+                        <li>Say:<b> Hello</b></li>
+                    </ul>
+                <li>Show Dog Breeds</li>
+                    <ul>
+                        <li>Say:<b> Show dog breed &lt;Dog Breed Name&gt;</dog></b></li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="audio">
+                <button id="start-record-btn" title="Start Recording">Turn On Listening</button>
+                <button id="stop-record-btn" title="Stop Recording">Turn Off Listening</button>
+            </div>
+            <script>
+                if (annyang) {
+                    const ValidColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'white'];
+                    const ValidPages = ['home', 'stocks', 'dogs'];
+                    const commands = {
+                      'hello': () => {
+                        alert('Hello how are you?');
+                      },
+                      'Change the color to :color': (color) => {
+                        color = color.toLowerCase();
+                        if (ValidColors.includes(color)) {
+                          document.body.style.backgroundColor = color;
+                        } else {
+                          alert('Invalid color. Please choose from: ' + ValidColors.join(', '));
+                        }
+                      },
+                      'Navigate to *page': (page) => {
+                        page = page.toLowerCase();
+                        if (ValidPages.includes(page)) {
+                          window.location.href = page + '.html';
+                        } else {
+                          alert('Invalid page. Please choose from: ' + ValidPages.join(', '));
+                        }
+                      },
+                      'Show dog breed *breed': (breedName) => {
+                        if (!breedData.length) {
+                            alert("Please say 'Show dog breeds' first to load the data.");
+                            return;
+                        }
+            
+                        const match = breedData.find(b => 
+                            b.attributes.name.toLowerCase() === breedName.toLowerCase()
+                        );
+            
+                        if (match) {
+                            const breedInfoContainer = document.getElementById("breed-info");
+                            breedInfoContainer.innerHTML = `
+                                <h2>${match.attributes.name}</h2>
+                                <p><strong>Description:</strong> ${match.attributes.description || "N/A"}</p>
+                                <p><strong>Min Life Span:</strong> ${match.attributes.life.min || "N/A"}</p>
+                                <p><strong>Max Life Span:</strong> ${match.attributes.life.max || "N/A"}</p>
+                            `;
+                            breedInfoContainer.style.display = "block";
+                        } else {
+                            alert(`Could not find breed: ${breedName}`);
+                        }
+                    }
+                };
+                  
+                    annyang.addCommands(commands);
+                    document.getElementById('start-record-btn').addEventListener('click', () => {
+                        annyang.start();
+                        console.log('Microphone is on');
+                    });
+                    document.getElementById('stop-record-btn').addEventListener('click', () => {
+                        annyang.abort();
+                        console.log('Microphone is off');
+                    });
+                  }
+            </script>
+        </body>
+          
+    </body>
+</html>
